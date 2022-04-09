@@ -1,5 +1,5 @@
 #pragma once
-
+// include only once during compilation
 
 #include "parserWorker.hpp"
 #include "kMeansLearner.hpp"
@@ -14,9 +14,9 @@ namespace Whisper
 {
 
 
-class ParserWorkerThread;
-class AnalyzerWorkerThread;
-class KMeansLearner;
+class ParserWorkerThread; //classes in Whisper namespace defined
+class AnalyzerWorkerThread; //classes in Whisper namespace defined
+class KMeansLearner; //classes in Whisper namespace defined
 
 
 struct DeviceConfigParam final {
@@ -33,6 +33,7 @@ struct DeviceConfigParam final {
     vector<nic_port_id_t> dpdk_port_vec;
 
     auto inline display_params() const -> void {
+	    // function to display paramters
         printf("[Whisper Device Configuration]\n");
 
         printf("Num. NIC RX queue: %d, Num. NIC TX queue: %d, NIC Mbuf pool size: %d.\n",
@@ -50,10 +51,10 @@ struct DeviceConfigParam final {
         , core_use_for_analyze, core_use_for_parser, core_num);
     }
 
-    DeviceConfigParam() {}
-    virtual ~DeviceConfigParam() {}
-    DeviceConfigParam & operator=(const DeviceConfigParam &) = delete;
-    DeviceConfigParam(const DeviceConfigParam &) = delete;
+    DeviceConfigParam() {} // empty constructor
+    virtual ~DeviceConfigParam() {} // destructor
+    DeviceConfigParam & operator=(const DeviceConfigParam &) = delete; // C++11 feature jo mere upar se jaa raha
+    DeviceConfigParam(const DeviceConfigParam &) = delete; // C++11 feature jo mere upar se jaa raha
 };
 
 
@@ -61,17 +62,17 @@ struct ThreadStateManagement final {
 
 	bool stop = true;
 
-	vector<shared_ptr<ParserWorkerThread> > parser_worker_thread_vec;
-    vector<shared_ptr<AnalyzerWorkerThread> > analyzer_worker_thread_vec;
+	vector<shared_ptr<ParserWorkerThread> > parser_worker_thread_vec; // parser worker thread's vector
+    vector<shared_ptr<AnalyzerWorkerThread> > analyzer_worker_thread_vec; // analyzer worker thread's vector
 
-	ThreadStateManagement() = default;
-    virtual ~ThreadStateManagement() {}
-    ThreadStateManagement & operator=(const ThreadStateManagement &) = default;
-    ThreadStateManagement(const ThreadStateManagement &) = default;
+	ThreadStateManagement() = default; // default compiler generated content (some C++11 feature)
+    virtual ~ThreadStateManagement() {} // destructor 
+    ThreadStateManagement & operator=(const ThreadStateManagement &) = default; // C++11 feature jo mere upar se jaa raha
+    ThreadStateManagement(const ThreadStateManagement &) = default; // C++11 feature jo mere upar se jaa raha
 
     ThreadStateManagement(const decltype(parser_worker_thread_vec) & _p_vec,
                           const decltype(analyzer_worker_thread_vec) & _a_vec): 
-                          parser_worker_thread_vec(_p_vec), analyzer_worker_thread_vec(_a_vec), stop(false) {}
+                          parser_worker_thread_vec(_p_vec), analyzer_worker_thread_vec(_a_vec), stop(false) {} // consturctor when params passed
 
 };
 
@@ -80,8 +81,8 @@ class DeviceConfig final {
     
 private:
 
-    using device_list_t = vector<DpdkDevice*>;
-    using assign_queue_t = vector<shared_ptr<DpdkConfig> >;
+    using device_list_t = vector<DpdkDevice*>; // dpdk device list
+    using assign_queue_t = vector<shared_ptr<DpdkConfig> >; // assigned queue list
 
     shared_ptr<const DeviceConfigParam> p_configure_param;
 
