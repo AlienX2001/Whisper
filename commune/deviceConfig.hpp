@@ -90,7 +90,7 @@ private:
     bool verbose = true;
     mutable bool dpdk_init_once = false;
 
-    // 3 helper for do_init
+    // 3 helper for do_init - kaise kr raha hai?
     auto configure_dpdk_nic(const CoreMask mask_all_used_core) const -> device_list_t;
 
     auto assign_queue_to_parser(const device_list_t & dev_list, 
