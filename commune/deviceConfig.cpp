@@ -7,11 +7,13 @@ using namespace pcpp;
 
 void DeviceConfig::list_dpdk_ports() const 
 {
+	// definition of the list dpdk port function declared earlier in DeviceConfig class in line 132 in deviceConfig.hpp
 	if (verbose) {
 		LOGF("Display DPDK device info.");
 	}
 
 	CoreMask core_mask_use;
+	//setting up coremasks to use
 	if (p_configure_param->core_num <= 1) {
 		core_mask_use = getCoreMaskForAllMachineCores();
 	} else {
@@ -19,6 +21,7 @@ void DeviceConfig::list_dpdk_ports() const
 	}
 	
 	printf("----- Display DPDK setting -----\n");
+	//checking if DPDK has initilaized, if not try to init DPDK
 	if (dpdk_init_once) {
 		LOGF("DPDK has init.");
 	} else {
@@ -30,7 +33,7 @@ void DeviceConfig::list_dpdk_ports() const
 	}
 
 	printf("DPDK port list:\n");
-
+	// print DPDK ports available
 	const auto device_list = DpdkDeviceList::getInstance().getDpdkDeviceList();
 	for(const auto p_dev: device_list) {
 		decltype(p_dev) dev = p_dev;
@@ -46,6 +49,7 @@ void DeviceConfig::list_dpdk_ports() const
 auto DeviceConfig::assign_queue_to_parser(const device_list_t & dev_list, 
 											const vector<SystemCore> & cores_parser) const -> assign_queue_t 
 {
+// definition of the list dpdk port function declared earlier in DeviceConfig class in line 132 in deviceConfig.hpp
 	if (verbose) {
 		LOGF("Assign NIC queue to packer parsering threads.");
 	}
