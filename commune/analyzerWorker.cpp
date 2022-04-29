@@ -12,7 +12,7 @@ static inline auto __get_double_ts() -> double_t
 }
 
 
-void AnalyzerWorkerThread::stop() 
+void AnalyzerWorkerThread::stop() // code whch runs when we press ctrl+c(sigterm)
 {
     LOGF("Analyzer on core # %2d stop.", getCoreId());
     m_stop = true;
@@ -33,7 +33,7 @@ void AnalyzerWorkerThread::stop()
 }
 
 
-bool AnalyzerWorkerThread::run(uint32_t coreId)
+bool AnalyzerWorkerThread::run(uint32_t coreId) // code to run
 {
     
     if (p_analyzer_config == nullptr) {
