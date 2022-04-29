@@ -28,17 +28,17 @@ struct ParserConfigParam final {
 	};
 
 	double_t verbose_interval = 5.0;
-	verbose_mode_t verbose_mode = NONE;
+	verbose_mode_t verbose_mode = NONE; // ALL for some verbose output
 
 	#define META_PKT_ARR_LIN (1 << 25)
 	size_t meta_pkt_arr_size = 1000000;
 	#define RECEIVE_BURST_LIM (1 << 16)
 	size_t max_receive_burts = 64;
 
-	ParserConfigParam() = default;
-    virtual ~ParserConfigParam() {}
-    ParserConfigParam & operator=(const ParserConfigParam &) = delete;
-    ParserConfigParam(const ParserConfigParam &) = delete;
+	ParserConfigParam() = default; // default consstructor
+    virtual ~ParserConfigParam() {} // used to destruct an object of child class
+    ParserConfigParam & operator=(const ParserConfigParam &) = delete; // Delete the copy assignment operator
+    ParserConfigParam(const ParserConfigParam &) = delete; // Delete the copy constructor
 
 	auto inline display_params() const -> void {
         printf("[Whisper Parser Configuration]\n");
